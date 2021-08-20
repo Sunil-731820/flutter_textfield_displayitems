@@ -8,6 +8,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final TextEditingController controller1 = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +23,10 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             TextField(
-              decoration: InputDecoration(labelText: "Enter Anything Here"),
+              controller: controller1,
+              decoration: InputDecoration(
+                  labelText: "Enter Anything Here",
+                  border: OutlineInputBorder()),
               maxLength: 100,
               minLines: 1,
               autocorrect: true,
@@ -30,13 +34,45 @@ class _HomePageState extends State<HomePage> {
               cursorHeight: 20,
             ),
             TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  var name_entered = controller1.text;
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              screenwelcome(items: name_entered)));
+                  SizedBox(height: 10);
+                },
                 child: Text("Save data ",
-                    style:
-                        TextStyle(fontSize: 30, fontWeight: FontWeight.bold)))
+                    style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.yellowAccent,
+                        backgroundColor: Colors.redAccent)))
           ],
         ),
       ),
     );
+  }
+}
+
+class screenwelcome extends StatelessWidget {
+  //const screenwelcome({ Key? key }) : super(key: key);
+  final items;
+  screenwelcome({@required this.items});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("Entered items or history"),
+        ),
+        body: ListView(
+          children: [
+            Text("$items",
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+            ListTile(),
+          ],
+        ));
   }
 }
