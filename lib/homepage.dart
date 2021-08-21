@@ -36,11 +36,13 @@ class _HomePageState extends State<HomePage> {
             TextButton(
                 onPressed: () {
                   var name_entered = controller1.text;
+                  //var date = DateTime.now();
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
                               screenwelcome(items: name_entered)));
+
                   SizedBox(height: 10);
                 },
                 child: Text("Save data ",
@@ -59,6 +61,7 @@ class _HomePageState extends State<HomePage> {
 class screenwelcome extends StatelessWidget {
   //const screenwelcome({ Key? key }) : super(key: key);
   final items;
+  var date = DateTime.now();
   screenwelcome({@required this.items});
 
   @override
@@ -69,9 +72,9 @@ class screenwelcome extends StatelessWidget {
         ),
         body: ListView(
           children: [
-            Text("$items",
+            Text("$items , $date ",
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-            ListTile(),
+            Divider(),
           ],
         ));
   }
